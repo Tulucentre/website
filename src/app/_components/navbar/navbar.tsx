@@ -87,7 +87,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (pathname === "/") {
+    if (pathname === "/" || pathname === "/koraga") {
       if (isScrolled) scrollUp();
       else scrollDown();
     } else {
@@ -107,7 +107,7 @@ export default function Navbar() {
     <>
       <nav className="fixed top-0 left-0 z-50 flex h-auto w-full justify-center px-4">
         <div className="flex w-full max-w-7xl items-center justify-between">
-          <Link href={"/"}>
+          <Link href="/koraga">
             <Image
               src={"/images/nitte-university.svg"}
               className="h-10 w-fit sm:h-12 md:h-14 lg:h-16"
@@ -174,9 +174,6 @@ function SideBar({
           onClick={() => setOpen(false)}
         />
         <ul className="mt-20 flex h-auto min-h-[30rem] w-full flex-col items-center justify-center gap-8 text-lg font-semibold text-white">
-          {/* {#each navItems as item}
-				<li><a href={item.link} onclick={toggleDrawer}>{item.name}</a></li>
-			{/each} */}
           {navItems.map((item, idx) => (
             <li key={idx}>
               <a href={item.link} onClick={() => setOpen(false)}>

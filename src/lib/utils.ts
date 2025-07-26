@@ -147,6 +147,31 @@ export const columns = [
     displayName: "D4 Kapda",
     required: true,
   },
+  {
+    name: "cf_similar_meaning",
+    displayName: "Similar Meaning",
+    required: false,
+  },
+  {
+    name: "grammatical_form",
+    displayName: "Grammatical Form",
+    required: false,
+  },
+  {
+    name: "tulu_meaning",
+    displayName: "Tulu Meaning",
+    required: true,
+  },
+  {
+    name: "kannada_meaning",
+    displayName: "Kannada Meaning",
+    required: true,
+  },
+  {
+    name: "english_meaning",
+    displayName: "English Meaning",
+    required: true,
+  },
 ];
 
 export function parseDate(d: string | Date) {

@@ -1,14 +1,14 @@
 export const navItems = [
   {
     name: "Home",
-    link: "/",
+    link: "/koraga",
   },
   {
     name: "Words",
-    link: "/words",
+    link: "/koraga/words",
   },
   {
     name: "About",
-    link: "/about",
+    link: "/koraga/about",
   },
 ];

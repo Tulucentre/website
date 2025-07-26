@@ -24,7 +24,7 @@ export default function WordCard({
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto border-0 bg-gradient-to-br from-blue-50 to-yellow-50 shadow-2xl">
+      <DialogContent className="max-h-[80vh] overflow-y-auto border-0 bg-gradient-to-br from-blue-50 to-yellow-50 shadow-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
         <DialogHeader className="space-y-4 pb-6">
           {title && (
             <DialogTitle className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-center text-4xl font-bold text-transparent md:text-5xl">

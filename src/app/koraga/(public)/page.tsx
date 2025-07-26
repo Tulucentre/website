@@ -1,6 +1,6 @@
 import React from "react";
-import WordSearch from "../_components/wordSearch/wordSearch";
-import WordOfTheDay from "../_components/wotd/wordOfTheDay";
+import WordSearch from "../../_components/wordSearch/wordSearch";
+import WordOfTheDay from "../../_components/wotd/wordOfTheDay";
 import { api } from "~/trpc/server";
 import Link from "next/link";
 import Image from "next/image";
