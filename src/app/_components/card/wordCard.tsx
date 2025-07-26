@@ -38,9 +38,9 @@ export default function WordCard({
           <Card className="border-l-4 border-l-blue-600 bg-white/80 shadow-md backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-blue-800">
+                <span className="text-xl font-semibold text-blue-800">
                   Word Forms
-                </h3>
+                </span>
                 {word.grammatical_form && (
                   <Badge
                     variant="secondary"

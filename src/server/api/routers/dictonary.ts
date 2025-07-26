@@ -1,6 +1,5 @@
 import { getDictionaryCache, getUniqueNumber } from "~/server/utils";
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { TRPCError } from "@trpc/server";
 import { CacheKeys, getCache, setCache } from "~/lib/cache";
 import { type WordOfTheDay } from "~/lib/types";
 
@@ -10,10 +9,10 @@ export const dictonaryRouter = createTRPCRouter({
     const previousWOTD = getCache<WordOfTheDay>(CacheKeys.WORD_OF_THE_DAY);
 
     if (vocab === null || vocab.length === 0) {
-      throw new TRPCError({
+      return {
         code: "NOT_FOUND",
         message: "No vocabulary data found",
-      });
+      };
     }
 
     if (previousWOTD === null || previousWOTD.values.length === 0) {
@@ -45,14 +44,14 @@ export const dictonaryRouter = createTRPCRouter({
     const word = getCache<WordOfTheDay>(CacheKeys.WORD_OF_THE_DAY);
 
     if (word === null) {
-      throw new TRPCError({
+      return {
         code: "NOT_FOUND",
         message: "Word of the day not found",
-      });
+      };
     }
 
     return {
-      status: "SUCCESS",
+      code: "SUCCESS",
       data: word.word,
       message: "Word of the day retrieved successfully",
     };

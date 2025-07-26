@@ -1,0 +1,100 @@
+{
+  "images": {
+    "design": "/images/About-design.png",
+    "aboutImages": {
+      "img1": "/images/about-images/img1.jpg",
+      "img2": "/images/about-images/img2.jpg",
+      "img3": "/images/about-images/img3.jpg",
+      "img4": "/images/about-images/img4.jpg",
+      "img5": "/images/about-images/img5.jpg",
+      "img6": "/images/about-images/img6.jpg",
+      "img7": "/images/about-images/img7.jpg",
+      "img8": "/images/about-images/img8.jpg"
+    }
+  },
+  "content": {
+    "title": "Centre for Tulu Studies at Nitte DU",
+    "introduction": {
+      "paragraph1": "Nitte DU is located in the coastal belt of Karnataka, where Tulu is the predominant language. Tulu is recognized as the first offshoot of the Proto-South Dravidian languages. According to the ancient Tamil Sangam literature, the region is named after its language—Tulunadu. Tulunadu has long been a multilingual area, with Tulu serving as the lingua franca. In addition to Tulu, several other languages are spoken, including Koraga, Beary, Konkani, Kannada, Kodava, Malayalam, and their various dialects.",
+      "paragraph2": "With a deep love for its mother tongue and a commitment to preserving indigenous knowledge and culture, a study centre was established at Nitte DU in 2014. This centre was created to spearhead a major project—the Tulu Cognate Dictionary. Over the years, the centre has undertaken numerous projects and hosted various programs to promote and preserve the rich linguistic and cultural heritage of the region."
+    },
+    "publications": [
+      {
+        "title": "Kannada Nudi Kalikegondu Kaipidi",
+        "year": "1st edition 2010, 2nd edition 2016"
+      },
+      {
+        "title": "English-Kannada-Tulu Dictionary for basic language learners",
+        "year": "2018"
+      },
+      {
+        "title": "Tulu Jnatipada Sanchaya",
+        "year": "2019"
+      },
+      {
+        "title": "A Handbook to Learn Tulu",
+        "year": "2020"
+      },
+      {
+        "title": "Tulu Geethanjali",
+        "year": "2022"
+      },
+      {
+        "title": "Tirukkural (in Konkani)",
+        "year": "2023"
+      }
+    ],
+    "objectives": [
+      {
+        "id": "item-1",
+        "title": "1. Promotion of Tulu Language and Culture",
+        "content": "To promote awareness of the Tulu language and culture, Nitte DU has reinstituted the annual Tulu Dina program, which is celebrated every year on October 2nd. The event brings together the community to raise awareness, and speeches, as well as articles in magazines and newspapers, contribute to this ongoing effort."
+      },
+      {
+        "id": "item-2",
+        "title": "2. Tulu Research",
+        "content": [
+          "The center is actively engaged in research related to the Tulu language and culture. Scholars present their research at state and national seminars and workshops, and their papers are often published in academic journals and books. The centre also provides resources for students and Ph.D. scholars who seek materials for their research.",
+          "One of the significant achievements of the centre is the completion of Tulu Jnatipada Sanchaya—a scholarly work documenting the Tulu language—and the Tulu Cognate Dictionary Project (2014-2019). This project earned the prestigious Hermann Gunderht Award from the Dravidian Linguistics Association in 2021."
+        ]
+      },
+      {
+        "id": "item-3",
+        "title": "3. Celebration of Tulu Festivals",
+        "content": "The centre celebrates important Tulu festivals such as \"Ill Dinvajunu\" and \"Tulu Parba,\" which help raise awareness of Tulu culture within the community. These events highlight the rich traditions and customs of the Tulu-speaking people."
+      },
+      {
+        "id": "item-4",
+        "title": "4. Study of Local Languages and Cultures",
+        "content": "Tulunadu is a multilingual region, with Tulu serving as the lingua franca. The centre is committed to preserving the languages and cultures of the area. A significant initiative under this objective is the Documentation of Koraga Folk Knowledge and Dictionary Project. This project focuses on preserving the language and culture of the Koraga tribe, an indigenous group in the region. Aryathara Enterprises, Bangalore, is funding this project"
+      },
+      {
+        "id": "item-5",
+        "title": "5. Cultural Exchanges",
+        "content": [
+          "The Dr. K. R. Shetty Centre for Tulu Studies also facilitates cultural exchanges. One notable project is the translation of Tamil Sangam literature, a collaboration with the Central Institute of Classical Tamil. The Tirukkural Tulu and Koraga translation and the old grammar book of Tamil – Tolkappiyam translation to Tulu language projects are completed. The translation of Tamil Classical Texts, a set of 9 books, Ettutokai Pattuppattu is in progress.",
+          "Additionally, the centre is undertaking a project titled Preserving Kodava: Linguistic and Cultural Documentation, which focuses on the Kodava language spoken in the neighbouring Kodagu district."
+        ]
+      },
+      {
+        "id": "item-6",
+        "title": "6. Design and Delivery of Academic Programs",
+        "content": "The center has introduced basic language learning programs such as Tulu Teriyonuga and Tili Kannada, through which new learners can acquire foundational skills in Tulu and Kannada. Furthermore, a Diploma program in Tulu Studies is being developed, and a PG Diploma syllabus is also in progress."
+      }
+    ],
+    "facilities": [
+      {
+        "title": "Academic Office Space",
+        "description": "Dedicated workspace for staff and researchers"
+      },
+      {
+        "title": "Cultural Museum",
+        "description": "Showcasing curated artifacts of Tuluva culture"
+      },
+      {
+        "title": "Research Library",
+        "description": "Well-equipped with resources for Tulu Studies"
+      }
+    ]
+  }
+}

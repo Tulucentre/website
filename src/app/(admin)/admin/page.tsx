@@ -118,7 +118,7 @@ export default function Admin() {
 
       <Button
         onClick={() => {
-          loadMutation.mutate("cmbulul680006rq9nwza1x0a4");
+          loadMutation.mutate("cmdk2c8kq0006rqnnnlnn2fqz");
         }}
       >
         Load

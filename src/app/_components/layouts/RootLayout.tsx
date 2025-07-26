@@ -2,6 +2,7 @@ import { HydrateClient } from "~/trpc/server";
 import Navbar from "../navbar/navbar";
 import { ReactScan } from "../reactscan";
 import Feedback from "../feedback/feedback";
+import Footer from "../footer/footer";
 
 export default function PublicLayout({
   children,
@@ -17,6 +18,7 @@ export default function PublicLayout({
           <Navbar />
           <Feedback />
           {children}
+          <Footer />
         </main>
       </HydrateClient>
     </>

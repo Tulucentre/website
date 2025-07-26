@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { navItems } from "./navitems";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -89,6 +90,8 @@ export default function Navbar() {
     if (pathname === "/") {
       if (isScrolled) scrollUp();
       else scrollDown();
+    } else {
+      scrollUp();
     }
   }, [pathname, isScrolled]);
 
@@ -104,14 +107,16 @@ export default function Navbar() {
     <>
       <nav className="fixed top-0 left-0 z-50 flex h-auto w-full justify-center px-4">
         <div className="flex w-full max-w-7xl items-center justify-between">
-          <Image
-            src={"/images/nitte-university.svg"}
-            className="h-10 w-fit sm:h-12 md:h-14 lg:h-16"
-            id="logo"
-            height={400}
-            width={400}
-            alt="Nitte Deemed to be University"
-          />
+          <Link href={"/"}>
+            <Image
+              src={"/images/nitte-university.svg"}
+              className="h-10 w-fit sm:h-12 md:h-14 lg:h-16"
+              id="logo"
+              height={400}
+              width={400}
+              alt="Nitte Deemed to be University"
+            />
+          </Link>
           <ul
             id="nav-items"
             className="text-primary hidden flex-row gap-5 text-xl font-semibold lg:flex"
