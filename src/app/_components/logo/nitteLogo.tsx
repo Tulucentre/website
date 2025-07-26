@@ -18,7 +18,7 @@ export default function NitteLogo({
         height="600"
         viewBox="0 0 600 600"
         xmlSpace="preserve"
-        className={cn("z-10", className)}
+        className={cn("", className)}
       >
         <g transform="matrix(1.26 0 0 1.26 289.73 300.17)">
           <g style={{}}>

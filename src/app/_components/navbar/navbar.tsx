@@ -105,7 +105,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 z-50 flex h-auto w-full justify-center px-4">
+      <nav className="fixed top-0 left-0 z-20 flex h-auto w-full justify-center px-4">
         <div className="flex w-full max-w-7xl items-center justify-between">
           <Link href="/koraga">
             <Image

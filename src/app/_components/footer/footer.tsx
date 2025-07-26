@@ -16,7 +16,7 @@ export default async function Footer() {
         className={`to-primary h-10 bg-gradient-to-b from-transparent`}
       ></div>
       <footer className="non-drawer flex w-full flex-col items-center">
-        <div className="bg-primary text-background z-10 h-auto w-full py-5">
+        <div className="bg-primary text-background h-auto w-full py-5">
           <div className="my-5 flex w-full flex-col items-center justify-around gap-8 lg:flex-row lg:items-start lg:gap-0">
             <div>
               <span className="hidden text-2xl font-semibold lg:block">

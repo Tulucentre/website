@@ -42,7 +42,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="mb-16 text-center">
-          <h1 className="text-primary font-aref-ruqaa mb-6 text-5xl font-bold md:text-6xl">
+          <h1 className="text-primary font-caprasimo font-meidum mb-6 text-5xl md:text-6xl">
             {config.content.title}
           </h1>
           <div className="bg-primary mx-auto mb-8 h-1 w-24"></div>
@@ -50,8 +50,8 @@ export default function AboutPage() {
 
         {/* Introduction */}
         <div className="relative mb-16">
-          <div className="relative z-10 rounded-lg bg-white px-8 sm:px-20 lg:px-28 xl:px-40">
-            <p className="z-10 text-justify text-lg leading-relaxed font-semibold text-gray-900 lg:text-center">
+          <div className="relative rounded-lg bg-white px-8 sm:px-20 lg:px-28 xl:px-40">
+            <p className="text-justify text-lg leading-relaxed font-semibold text-gray-900 lg:text-center">
               {config.content.introduction.paragraph1}
             </p>
             <p className="mt-4 text-justify text-lg leading-relaxed font-semibold text-gray-700 lg:text-center">
@@ -168,14 +168,15 @@ export default function AboutPage() {
           <button
             onClick={scrollRight}
             className="absolute top-1/2 right-6 z-10 -translate-y-1/2 transform"
+            style={{ pointerEvents: "auto" }}
           >
-            <SquareChevronRight className="h-10 w-10 scale-125 text-white transition-all duration-100 hover:scale-[1.4]" />
+            <SquareChevronRight className="text-primary h-10 w-10 scale-125 transition-all duration-100 hover:scale-[1.4]" />
           </button>
 
           {/* Scrollable Image Container */}
           <div
             ref={scrollContainer}
-            className="scrollbar-hide flex h-[380px] w-full gap-x-7 overflow-x-auto pt-5 pb-5"
+            className="scrollbar-hide flex h-[380px] w-[calc(100%-80px)] gap-x-7 overflow-x-auto pt-5 pr-20 pb-5" // Added pr-20 for right padding
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {Object.entries(config.images.aboutImages).map(([key, src]) => (
@@ -194,6 +195,7 @@ export default function AboutPage() {
           <button
             onClick={scrollLeft}
             className="absolute top-1/2 -left-12 z-10 -translate-y-1/2 transform"
+            style={{ pointerEvents: "auto" }}
           >
             <SquareChevronLeft className="text-primary h-10 w-10 scale-125 transition-all duration-100 hover:scale-[1.4]" />
           </button>

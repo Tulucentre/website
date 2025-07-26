@@ -2,12 +2,7 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import React from "react";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent } from "~/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-} from "~/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "~/components/ui/dialog";
 import type { Word } from "~/lib/types";
 import { columns, getColumn, parseDelimiter } from "~/lib/utils";
 
@@ -33,77 +28,77 @@ export default function WordCard({
           )}
         </DialogHeader>
 
-        <DialogDescription className="space-y-8">
-          {/* Word Forms Section */}
-          <Card className="border-l-4 border-l-blue-600 bg-white/80 shadow-md backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="text-xl font-semibold text-blue-800">
-                  Word Forms
-                </span>
-                {word.grammatical_form && (
-                  <Badge
-                    variant="secondary"
-                    className="border-secondary bg-secondary/30 border font-medium text-black"
-                  >
-                    {word.grammatical_form}
-                  </Badge>
-                )}
-              </div>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <DialogHeading
-                  text={word.d1}
-                  column={getColumn("d1", columns)?.displayName ?? "Form 1"}
-                />
-                <DialogHeading
-                  text={word.d2}
-                  column={getColumn("d2", columns)?.displayName ?? "Form 2"}
-                />
-                <DialogHeading
-                  text={word.d3}
-                  column={getColumn("d3", columns)?.displayName ?? "Form 3"}
-                />
-                <DialogHeading
-                  text={word.d4}
-                  column={getColumn("d4", columns)?.displayName ?? "Form 4"}
-                />
-              </div>
-            </CardContent>
-          </Card>
+        {/* <DialogDescription className="space-y-8"> */}
+        {/* Word Forms Section */}
+        <Card className="border-l-4 border-l-blue-600 bg-white/80 shadow-md backdrop-blur-sm">
+          <CardContent className="p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-xl font-semibold text-blue-800">
+                Word Forms
+              </span>
+              {word.grammatical_form && (
+                <Badge
+                  variant="secondary"
+                  className="border-secondary bg-secondary/30 border font-medium text-black"
+                >
+                  {word.grammatical_form}
+                </Badge>
+              )}
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <DialogHeading
+                text={word.d1}
+                column={getColumn("d1", columns)?.displayName ?? "Form 1"}
+              />
+              <DialogHeading
+                text={word.d2}
+                column={getColumn("d2", columns)?.displayName ?? "Form 2"}
+              />
+              <DialogHeading
+                text={word.d3}
+                column={getColumn("d3", columns)?.displayName ?? "Form 3"}
+              />
+              <DialogHeading
+                text={word.d4}
+                column={getColumn("d4", columns)?.displayName ?? "Form 4"}
+              />
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Meanings Section */}
-          <Card className="border-l-4 border-l-yellow-500 bg-white/80 shadow-md backdrop-blur-sm">
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-semibold text-blue-800">
-                Meanings
-              </h3>
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <ShowColumnContent column="tulu_meaning" word={word} />
-                <ShowColumnContent column="kannada_meaning" word={word} />
-                <ShowColumnContent column="english_meaning" word={word} />
-              </div>
-            </CardContent>
-          </Card>
+        {/* Meanings Section */}
+        <Card className="border-l-4 border-l-yellow-500 bg-white/80 shadow-md backdrop-blur-sm">
+          <CardContent className="p-6">
+            <h3 className="mb-4 text-xl font-semibold text-blue-800">
+              Meanings
+            </h3>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              <ShowColumnContent column="tulu_meaning" word={word} />
+              <ShowColumnContent column="kannada_meaning" word={word} />
+              <ShowColumnContent column="english_meaning" word={word} />
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Usage Examples Section */}
-          <Card className="border-l-4 border-l-blue-500 bg-white/80 shadow-md backdrop-blur-sm">
-            <CardContent className="p-6">
-              <h3 className="mb-4 text-xl font-semibold text-blue-800">
-                Usage Examples
-              </h3>
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <div className="space-y-4">
-                  <ShowColumnContent column="usage_sentence" word={word} />
-                  <ShowColumnContent column="usage_tulu" word={word} />
-                </div>
-                <div className="space-y-4">
-                  <ShowColumnContent column="usage_kannada" word={word} />
-                  <ShowColumnContent column="usage_english" word={word} />
-                </div>
+        {/* Usage Examples Section */}
+        <Card className="border-l-4 border-l-blue-500 bg-white/80 shadow-md backdrop-blur-sm">
+          <CardContent className="p-6">
+            <h3 className="mb-4 text-xl font-semibold text-blue-800">
+              Usage Examples
+            </h3>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <div className="space-y-4">
+                <ShowColumnContent column="usage_sentence" word={word} />
+                <ShowColumnContent column="usage_tulu" word={word} />
               </div>
-            </CardContent>
-          </Card>
-        </DialogDescription>
+              <div className="space-y-4">
+                <ShowColumnContent column="usage_kannada" word={word} />
+                <ShowColumnContent column="usage_english" word={word} />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        {/* </DialogDescription> */}
       </DialogContent>
     </Dialog>
   );
@@ -144,7 +139,7 @@ function ShowColumnContent({ word, column }: { word: Word; column: string }) {
 
     if (contentArray.length > 0) {
       return (
-        <div className="rounded-lg border border-blue-200 bg-white/90 p-4 transition-all duration-200 hover:border-yellow-300 hover:shadow-md">
+        <div className="font-kannada rounded-lg border border-blue-200 bg-white/90 p-4 transition-all duration-200 hover:border-yellow-300 hover:shadow-md">
           <h4 className="mb-3 text-sm font-medium tracking-wide text-blue-600 uppercase">
             {col.displayName}
           </h4>

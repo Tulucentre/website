@@ -1,7 +1,7 @@
 import { getDictionaryCache, getUniqueNumber } from "~/server/utils";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { CacheKeys, getCache, setCache } from "~/lib/cache";
-import { type WordOfTheDay } from "~/lib/types";
+import { type Word, type WordOfTheDay } from "~/lib/types";
 
 export const dictonaryRouter = createTRPCRouter({
   getWordOfTheDay: publicProcedure.query(async () => {
@@ -55,5 +55,45 @@ export const dictonaryRouter = createTRPCRouter({
       data: word.word,
       message: "Word of the day retrieved successfully",
     };
+  }),
+
+  popularSearch: publicProcedure.query(async ({ ctx }) => {
+    try {
+      const activeSnap = await ctx.db.snapshot.findFirst({
+        where: {
+          status: true,
+        },
+      });
+
+      if (activeSnap === null) {
+        return {
+          code: "NOT_FOUND",
+          message: "No active snapshot found",
+          data: [],
+        };
+      }
+
+      const dbData = await ctx.db.word.findMany({
+        take: 10,
+        where: {
+          snapshotId: activeSnap?.id,
+        },
+        orderBy: {
+          count: "desc",
+        },
+      });
+
+      return {
+        code: "SUCCESS",
+        message: "Popular search retrieved successfully",
+        data: dbData as Array<Word>,
+      };
+    } catch (error) {
+      return {
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to fetch popular search",
+        error: error instanceof Error ? error.message : "Unknown error",
+      };
+    }
   }),
 });

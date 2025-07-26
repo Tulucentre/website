@@ -13,13 +13,10 @@ export default function PublicLayout({
     <>
       <HydrateClient>
         <ReactScan />
-        {/* TODO: update min height */}
-        <main className="min-h-[150vh] min-w-screen">
-          <Navbar />
-          <Feedback />
-          {children}
-          <Footer />
-        </main>
+        <Navbar />
+        <Feedback />
+        <main className="min-h-screen min-w-screen">{children}</main>
+        <Footer />
       </HydrateClient>
     </>
   );

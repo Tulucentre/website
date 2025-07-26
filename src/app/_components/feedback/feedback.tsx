@@ -35,7 +35,7 @@ export default function Feedback() {
               duration: 0.5,
             });
           }}
-          className="border-secondary bg-primary fill-primary fixed top-[40vh] right-0 size-14 rounded-l-3xl border-2 stroke-white p-3 pr-2 drop-shadow-xl md:size-16"
+          className="border-secondary bg-primary fill-primary fixed top-[40vh] right-0 z-50 size-14 rounded-l-3xl border-2 stroke-white p-3 pr-2 drop-shadow-xl md:size-16"
         >
           Feedback
         </MessageCircleHeart>
