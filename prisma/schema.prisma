@@ -2,60 +2,141 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+  // Further reading:
+  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+  url      = env("DATABASE_URL")
 }
 
 // Necessary for Next auth
 model Account {
-    id                       String  @id @default(cuid())
-    userId                   String
-    type                     String
-    provider                 String
-    providerAccountId        String
-    refresh_token            String? // @db.Text
-    access_token             String? // @db.Text
-    expires_at               Int?
-    token_type               String?
-    scope                    String?
-    id_token                 String? // @db.Text
-    session_state            String?
-    user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    refresh_token_expires_in Int?
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? // @db.Text
+  access_token             String? // @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? // @db.Text
+  session_state            String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refresh_token_expires_in Int?
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  role Role @default(USER)
+
+  snapshots Snapshot[]
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
+}
+
+model Snapshot {
+  id        String  @id @default(cuid())
+  name      String
+  fileName  String
+  source    String  @unique
+  createdBy String
+  status    Boolean @default(false)
+
+  env String?
+
+  columns columns[] // { "name": "string", "rename": "string", "required": "boolean" }
+  words   Word[]
+
+  user      User     @relation(fields: [createdBy], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model columns {
+  id         String @id @default(cuid())
+  snapshotId String
+
+  name        String
+  displayName String
+  required    Boolean
+
+  snapshot Snapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+}
+
+model logs {
+  id String @id @default(cuid())
+
+  title       String
+  description String?
+  reference   String?
+
+  others    String[]
+  createdAt DateTime @default(now())
+}
+
+model Word {
+  id String @id @default(cuid())
+
+  entryId String?
+  count   Int     @default(0)
+  // category category? @default(Koraga)
+
+  d1 String?
+  d2 String?
+  d3 String?
+  d4 String?
+
+  cf_similar_meaning String?
+  grammatical_form   String?
+
+  tulu_meaning    String?
+  kannada_meaning String?
+  english_meaning String?
+
+  usage_sentence String?
+  usage_tulu     String?
+  usage_kannada  String?
+  usage_english  String?
+
+  snapshotId String
+  Snapshot   Snapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+}
+
+enum category {
+  Koraga
+}
+
+enum Role {
+  ADMIN
+  USER
 }
