@@ -16,86 +16,86 @@ export default function WordOfTheDay({ wotd }: { wotd: Word }) {
   const cardTitleRef = useRef<HTMLDivElement>(null);
   const mouseCircleRef = useRef<HTMLDivElement>(null);
 
-  const xToRef = useRef<gsap.QuickToFunc>(null);
-  const yToRef = useRef<gsap.QuickToFunc>(null);
+  // const xToRef = useRef<gsap.QuickToFunc>(null);
+  // const yToRef = useRef<gsap.QuickToFunc>(null);
 
-  const [isHovering, setIsHovering] = useState(false);
-  const [animationRunning, setAnimationRunning] = useState(false);
+  // const [isHovering, setIsHovering] = useState(false);
+  // const [animationRunning, setAnimationRunning] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (mouseCircleRef.current) {
-      xToRef.current = gsap.quickTo(mouseCircleRef.current, "x", {
-        duration: 0.6,
-        ease: "power2",
-      });
-      yToRef.current = gsap.quickTo(mouseCircleRef.current, "y", {
-        duration: 0.6,
-        ease: "power2",
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (mouseCircleRef.current) {
+  //     xToRef.current = gsap.quickTo(mouseCircleRef.current, "x", {
+  //       duration: 0.6,
+  //       ease: "power2",
+  //     });
+  //     yToRef.current = gsap.quickTo(mouseCircleRef.current, "y", {
+  //       duration: 0.6,
+  //       ease: "power2",
+  //     });
+  //   }
+  // }, []);
 
-  const handleMouseEnter = () => {
-    setIsHovering(true);
-    setAnimationRunning(true);
-    if (cardTitleRef.current) {
-      gsap.to(Array.from(cardTitleRef.current.children), {
-        y: -60,
-        opacity: 1,
-        duration: 0.5,
-        ease: "back.out",
-        stagger: 0.1,
-        onComplete: () => setAnimationRunning(false),
-      });
-    }
-  };
+  // const handleMouseEnter = () => {
+  //   setIsHovering(true);
+  //   setAnimationRunning(true);
+  //   if (cardTitleRef.current) {
+  //     gsap.to(Array.from(cardTitleRef.current.children), {
+  //       y: -60,
+  //       opacity: 1,
+  //       duration: 0.5,
+  //       ease: "back.out",
+  //       stagger: 0.1,
+  //       onComplete: () => setAnimationRunning(false),
+  //     });
+  //   }
+  // };
 
-  const handleMouseLeave = () => {
-    setIsHovering(false);
-    const animateOut = () => {
-      if (cardTitleRef.current) {
-        gsap.to(Array.from(cardTitleRef.current.children).reverse(), {
-          y: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.in",
-          stagger: 0.1,
-          onComplete: () => setAnimationRunning(false),
-        });
-      }
-    };
-    if (animationRunning) {
-      setTimeout(() => {
-        setAnimationRunning(true);
-        animateOut();
-      }, 500);
-    } else {
-      setAnimationRunning(true);
-      animateOut();
-    }
-    setTimeout(() => {
-      if (mouseCircleRef.current) {
-        gsap.to(mouseCircleRef.current, {
-          x: 0,
-          y: 0,
-          duration: 0.5,
-          ease: "linear",
-        });
-      }
-    }, 100);
-  };
+  // const handleMouseLeave = () => {
+  //   setIsHovering(false);
+  //   const animateOut = () => {
+  //     if (cardTitleRef.current) {
+  //       gsap.to(Array.from(cardTitleRef.current.children).reverse(), {
+  //         y: 0,
+  //         opacity: 0,
+  //         duration: 0.3,
+  //         ease: "power2.in",
+  //         stagger: 0.1,
+  //         onComplete: () => setAnimationRunning(false),
+  //       });
+  //     }
+  //   };
+  //   if (animationRunning) {
+  //     setTimeout(() => {
+  //       setAnimationRunning(true);
+  //       animateOut();
+  //     }, 500);
+  //   } else {
+  //     setAnimationRunning(true);
+  //     animateOut();
+  //   }
+  //   setTimeout(() => {
+  //     if (mouseCircleRef.current) {
+  //       gsap.to(mouseCircleRef.current, {
+  //         x: 0,
+  //         y: 0,
+  //         duration: 0.5,
+  //         ease: "linear",
+  //       });
+  //     }
+  //   }, 100);
+  // };
 
-  const handleMouseHover = (event: React.MouseEvent) => {
-    if (!cardRef.current || !mouseCircleRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = event.pageX - rect.right + mouseCircleRef.current.offsetWidth;
-    const y = event.pageY - rect.top - mouseCircleRef.current.offsetHeight;
-    if (isHovering && xToRef.current && yToRef.current) {
-      xToRef.current(x);
-      yToRef.current(y);
-    }
-  };
+  // const handleMouseHover = (event: React.MouseEvent) => {
+  //   if (!cardRef.current || !mouseCircleRef.current) return;
+  //   const rect = cardRef.current.getBoundingClientRect();
+  //   const x = event.pageX - rect.right + mouseCircleRef.current.offsetWidth;
+  //   const y = event.pageY - rect.top - mouseCircleRef.current.offsetHeight;
+  //   if (isHovering && xToRef.current && yToRef.current) {
+  //     xToRef.current(x);
+  //     yToRef.current(y);
+  //   }
+  // };
 
   const date = parseDate(new Date());
   // Replace with your actual data source
@@ -119,9 +119,9 @@ export default function WordOfTheDay({ wotd }: { wotd: Word }) {
       <div
         className="relative z-10 flex max-w-4xl flex-row flex-wrap justify-self-center bg-green-50 drop-shadow-lg sm:m-2 sm:w-[70%] sm:justify-self-end md:mt-10 lg:m-3"
         role="contentinfo"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseHover}
+        // onMouseEnter={handleMouseEnter}
+        // onMouseLeave={handleMouseLeave}
+        // onMouseMove={handleMouseHover}
       >
         <div
           ref={cardTitleRef}
@@ -131,7 +131,7 @@ export default function WordOfTheDay({ wotd }: { wotd: Word }) {
         </div>
         <div
           ref={cardRef}
-          className="bg-secondary relative flex h-auto w-full flex-col justify-between rounded-xl px-2 py-2 sm:px-4 sm:py-4 md:rounded-2xl md:px-10 md:py-8 md:hover:cursor-none lg:rounded-3xl lg:px-16 lg:py-10"
+          className="bg-secondary relative flex h-auto w-full flex-col justify-between rounded-xl px-2 py-2 sm:px-4 sm:py-4 md:rounded-2xl md:px-10 md:py-8 lg:rounded-3xl lg:px-16 lg:py-10"
         >
           <div className="p-2">
             <p className="z-40 mb-2 text-xl font-semibold sm:text-2xl md:mb-3 md:text-3xl lg:mb-4 lg:text-4xl">
