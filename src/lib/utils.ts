@@ -221,3 +221,16 @@ export function parseDate(d: string | Date) {
     timeZone: date.getTimezoneOffset(),
   };
 }
+
+export function filterUniqueWords(dict: Array<Word>) {
+  const result: Array<{ name: string; id: string; word: Word }> = [];
+
+  dict.forEach((word) => {
+    const uniques = new Set([word.d1, word.d2, word.d3, word.d4]);
+    uniques.forEach((unique) => {
+      if (unique !== "") result.push({ name: unique, id: word.id, word: word });
+    });
+  });
+
+  return result;
+}

@@ -1,35 +1,35 @@
 import React from "react";
 import Link from "next/link";
-import TabSwitch from "~/app/_components/switch/tabSwitch";
+import { api } from "~/trpc/server";
+import WordList from "~/app/_components/list/wordList";
 
 export default async function Words({
   searchParams,
 }: {
-  searchParams: Promise<{ tab: string | null; alpha: string | null }>;
+  searchParams: Promise<{
+    tab: string | null | undefined;
+    alpha: string | null | undefined;
+    search: string | null | undefined;
+    id: string | null | undefined;
+  }>;
 }) {
   const params = await searchParams;
-
-  console.log(params);
-
-  if (params.tab === "table") {
-    return (
-      <div>
-        <TabSwitch />
-      </div>
-    );
-  }
+  const dictData = await api.dictonary.getWordList({
+    alpha: params.alpha ?? null,
+    search: params.search ?? null,
+  });
 
   return (
     <>
       <div className="flex justify-center">
-        <div className="w-full max-w-[90rem] p-6">
+        <div className="w-full max-w-7xl p-6">
           <div className="flex flex-row flex-nowrap justify-between">
             <header className="font-aref-ruqaa mb-8 text-2xl font-bold md:text-4xl">
               Browse Dictionary
             </header>
-            <div className="flex flex-row flex-nowrap items-center gap-2">
+            {/* <div className="flex flex-row flex-nowrap items-center gap-2">
               <TabSwitch />
-            </div>
+            </div> */}
           </div>
           <div className="justify-left flex flex-wrap justify-center gap-2 lg:justify-normal">
             <Link
@@ -57,7 +57,11 @@ export default async function Words({
           </div>
         </div>
       </div>
-      {/* <WordList data={displayData} split={100} /> */}
+      <div className="flex w-full justify-center">
+        <div className="w-full max-w-7xl">
+          <WordList data={dictData.data} split={100} params={params} />
+        </div>
+      </div>
     </>
   );
 }
