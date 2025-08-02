@@ -1,6 +1,8 @@
 import { api } from "~/trpc/server";
 import WordSearch from "../wordSearch/wordSearch";
 import WordOfTheDay from "../wotd/wordOfTheDay";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 
 export async function HeadingAndSearch() {
   const wordOfTheDay = await api.dictonary.getWordOfTheDay();
@@ -16,7 +18,7 @@ export async function HeadingAndSearch() {
       <div className="mt-10 flex w-full justify-center px-8">
         <WordSearch className="max-w-3xl" />
       </div>
-      <div className="flex h-full w-full grow items-center justify-center">
+      <div className="flex h-full w-full grow flex-col items-center justify-evenly">
         {wordOfTheDay.code === "SUCCESS" && wordOfTheDay.data ? (
           <>
             <WordOfTheDay wotd={wordOfTheDay.data} />
@@ -45,6 +47,12 @@ export async function HeadingAndSearch() {
             </span>
           </div>
         )}
+
+        <div className="mb-20 md:mb-10">
+          <Link href="#popular">
+            <ChevronDown className="size-10 animate-bounce" />
+          </Link>
+        </div>
       </div>
     </div>
   );

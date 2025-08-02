@@ -20,3 +20,10 @@ export const uploadSnapFormSchemaZ = z.object({
     )
     .default([]),
 });
+
+export const feedbackFormSchemaZ = z.object({
+  name: z.string(),
+  email: z.email(),
+  message: z.string(),
+  reference: z.string().nullable(),
+});

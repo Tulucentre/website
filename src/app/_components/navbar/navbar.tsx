@@ -96,6 +96,7 @@ export default function Navbar() {
   }, [pathname, isScrolled]);
 
   useEffect(() => {
+    const mainContent = document.getElementById("mainContent");
     if (isSidebarOpen) {
       window.document.body.style.overflow = "hidden";
     } else {

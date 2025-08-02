@@ -117,7 +117,7 @@ export default function WordOfTheDay({ wotd }: { wotd: Word }) {
   return (
     <>
       <div
-        className="relative z-10 flex max-w-4xl flex-row flex-wrap justify-self-center bg-green-50 drop-shadow-lg sm:m-2 sm:w-[70%] sm:justify-self-end md:mt-10 lg:m-3"
+        className="relative z-10 flex h-fit max-w-4xl flex-row flex-wrap justify-self-center drop-shadow-lg sm:m-2 sm:w-[70%] sm:justify-self-end md:mt-10 lg:m-3"
         role="contentinfo"
         // onMouseEnter={handleMouseEnter}
         // onMouseLeave={handleMouseLeave}

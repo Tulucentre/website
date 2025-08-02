@@ -1,8 +1,4 @@
-"use client";
-
-import { useRef } from "react";
 import Image from "next/image";
-import { SquareChevronLeft, SquareChevronRight } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -10,22 +6,9 @@ import {
   AccordionTrigger,
 } from "~/components/ui/accordion";
 import config from "~/lib/about.json";
+import AboutCarousel from "~/app/_components/carousel/aboutCarousel";
 
 export default function AboutPage() {
-  const scrollContainer = useRef<HTMLDivElement>(null);
-
-  const scrollRight = () => {
-    if (scrollContainer.current) {
-      scrollContainer.current.scrollBy({ left: 600, behavior: "smooth" });
-    }
-  };
-
-  const scrollLeft = () => {
-    if (scrollContainer.current) {
-      scrollContainer.current.scrollBy({ left: -600, behavior: "smooth" });
-    }
-  };
-
   const renderContent = (content: string | string[]) => {
     if (Array.isArray(content)) {
       return content.map((paragraph, index) => (
@@ -163,43 +146,7 @@ export default function AboutPage() {
         </div>
 
         {/* Image Gallery */}
-        <div className="relative mx-10 w-full">
-          {/* Scroll Right Button */}
-          <button
-            onClick={scrollRight}
-            className="absolute top-1/2 right-6 z-10 -translate-y-1/2 transform"
-            style={{ pointerEvents: "auto" }}
-          >
-            <SquareChevronRight className="text-primary h-10 w-10 scale-125 transition-all duration-100 hover:scale-[1.4]" />
-          </button>
-
-          {/* Scrollable Image Container */}
-          <div
-            ref={scrollContainer}
-            className="scrollbar-hide flex h-[380px] w-[calc(100%-80px)] gap-x-7 overflow-x-auto pt-5 pr-20 pb-5" // Added pr-20 for right padding
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {Object.entries(config.images.aboutImages).map(([key, src]) => (
-              <Image
-                key={key}
-                src={src || "/placeholder.svg"}
-                alt="Tulucentre Team"
-                width={300}
-                height={350}
-                className="mb-4 w-auto rounded-lg shadow-md transition-all duration-500 ease-in-out hover:scale-110"
-              />
-            ))}
-          </div>
-
-          {/* Scroll Left Button */}
-          <button
-            onClick={scrollLeft}
-            className="absolute top-1/2 -left-12 z-10 -translate-y-1/2 transform"
-            style={{ pointerEvents: "auto" }}
-          >
-            <SquareChevronLeft className="text-primary h-10 w-10 scale-125 transition-all duration-100 hover:scale-[1.4]" />
-          </button>
-        </div>
+        <AboutCarousel images={config.images.aboutImages} />
 
         {/* Facilities Section */}
         <div className="mb-16 rounded-lg bg-white p-8 shadow-md">
@@ -250,7 +197,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .font-aref-ruqaa {
           font-family: "Aref Ruqaa", serif;
         }
@@ -267,7 +214,7 @@ export default function AboutPage() {
             font-size: 2rem;
           }
         }
-      `}</style>
+      `}</style> */}
     </section>
   );
 }

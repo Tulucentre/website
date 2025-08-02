@@ -92,7 +92,7 @@ export default function WordList({
       <div className="mb-12 w-full p-8 pb-0">
         <ul
           style={{ listStyleType: "disc" }}
-          className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          className="grid w-full grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4"
         >
           {displayData.map((word, idx) => {
             return (
@@ -105,7 +105,7 @@ export default function WordList({
                     });
                     setOpen(true);
                   }}
-                  className="cursor-pointer text-blue-600 underline"
+                  className="w-full cursor-pointer truncate overflow-hidden text-left break-words text-blue-600 underline"
                 >
                   {word.name}
                 </button>

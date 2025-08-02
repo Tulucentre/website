@@ -68,7 +68,7 @@ export default function WordSearch({ className }: { className?: string }) {
           placeholder="Search for a word..."
           onInput={handleInput}
           value={searchString}
-          className="border-secondary w-full rounded-l-full border-2 bg-white px-4 text-xl text-black lg:border-4"
+          className="border-secondary w-full rounded-l-full border-2 bg-white px-4 text-lg text-black md:text-xl lg:border-4"
         />
         <button
           className="bg-primary rounded-r-full p-2 pr-4"
@@ -77,7 +77,7 @@ export default function WordSearch({ className }: { className?: string }) {
             router.push(`/koraga/words?tab=list&search=${searchString}`);
           }}
         >
-          <Search className="size-10 stroke-white" />
+          <Search className="size-8 stroke-white md:size-10" />
         </button>
       </div>
 

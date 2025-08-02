@@ -58,8 +58,8 @@ export default async function Words({
         </div>
       </div>
       <div className="flex w-full justify-center">
-        <div className="w-full max-w-7xl">
-          <WordList data={dictData.data} split={100} params={params} />
+        <div className="w-full max-w-7xl px-4">
+          <WordList data={dictData.data} split={5000} params={params} />
         </div>
       </div>
     </>
