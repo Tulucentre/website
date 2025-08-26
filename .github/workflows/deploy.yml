@@ -33,9 +33,9 @@ jobs:
       - name: Copy Build files and dependencies
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "cp -r /home/tulucentre/builder/.next /home/tulucentre/prod/ && \
-            cp -r /home/tulucentre/builder/node_modules /home/tulucentre/prod/ && \
-            cp /home/tulucentre/builder/package.json /home/tulucentre/prod/"
+            "cp -rf /home/tulucentre/builder/.next /home/tulucentre/prod/ && \
+            cp -rf /home/tulucentre/builder/node_modules /home/tulucentre/prod/ && \
+            cp -rf /home/tulucentre/builder/package.json /home/tulucentre/prod/"
 
       - name: Restart PM2 process
         run: |
