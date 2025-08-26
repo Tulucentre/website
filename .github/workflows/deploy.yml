@@ -22,15 +22,20 @@ jobs:
 
       - name: Checkout code in server and build
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "cd /home/tulucentre/builder && git pull origin main && bun install && bun run build"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+            "cd /home/tulucentre/builder && git pull origin main && bun install && bun run build"
 
       - name: Stop PM2 process
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 stop client || true"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+           "pm2 stop client || true"
 
       - name: Copy Build files and dependencies
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "cp -r /home/tulucentre/builder/.next /home/tulucentre/prod/ && cp -r /home/tulucentre/builder/node_modules /home/tulucentre/prod/ && cp /home/tulucentre/builder/package.json /home/tulucentre/prod/"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+            "cp -r /home/tulucentre/builder/.next /home/tulucentre/prod/ && \
+            cp -r /home/tulucentre/builder/node_modules /home/tulucentre/prod/ && \
+            cp /home/tulucentre/builder/package.json /home/tulucentre/prod/"
 
       - name: Restart PM2 process
         run: |
