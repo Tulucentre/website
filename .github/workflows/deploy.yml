@@ -25,18 +25,11 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
             "cd /home/tulucentre/builder && git pull origin main && bun install && bun run build"
 
-      - name: Stop PM2 process
+      - name: Rename Build
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-           "pm2 stop client || true"
-
-      - name: Copy Build files and dependencies
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "cp -rf /home/tulucentre/builder/.next /home/tulucentre/prod/ && \
-            cp -rf /home/tulucentre/builder/node_modules /home/tulucentre/prod/ && \
-            cp -rf /home/tulucentre/builder/package.json /home/tulucentre/prod/"
+           "cd /home/tulucentre/builder && pm2 stop client && rm -rf build && cp ./.next ./build -r"
 
       - name: Restart PM2 process
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 restart client"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 restart client"
