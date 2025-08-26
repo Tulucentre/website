@@ -1,0 +1,37 @@
+name: Build and Deploy Next.Js App
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      branches:
+        - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.TULUCENTRE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.TULUCENTRE_SERVER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Checkout code in server and build
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "cd /home/tulucentre/builder && git pull origin main && bun install && bun run build"
+
+      - name: Stop PM2 process
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 stop client || true"
+
+      - name: Copy Build files and dependencies
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "cp -r /home/tulucentre/builder/.next /home/tulucentre/prod/ && cp -r /home/tulucentre/builder/node_modules /home/tulucentre/prod/ && cp /home/tulucentre/builder/package.json /home/tulucentre/prod/"
+
+      - name: Restart PM2 process
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 restart client"
