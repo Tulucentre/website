@@ -39,4 +39,4 @@ jobs:
 
       - name: Restart PM2 process
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SSH_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 restart client"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 restart client"
