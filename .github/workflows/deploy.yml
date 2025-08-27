@@ -20,16 +20,55 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.TULUCENTRE_SERVER_IP }} >> ~/.ssh/known_hosts
 
-      - name: Checkout code in server and build
+      - name: Install Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
+          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
+          source $GITHUB_ENV
+
+      - name: Verify Bun Installation
+        run: |
+          source $GITHUB_ENV
+          bun --version
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: |
+          source $GITHUB_ENV
+          bun install --lockfile-only
+
+      - name: Build the project
+        run: |
+          source $GITHUB_ENV
+          bun run build
+
+      - name: Prepare standalone output
+        run: |
+          source $GITHUB_ENV
+          mkdir -p standalone
+          cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
+          mv .next/standalone/* standalone/
+
+      - name: Stop Existing PM2 Process
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "cd /home/tulucentre/builder && git pull origin main && bun install && bun run build"
+            "pm2 stop client || true"
 
-      - name: Rename Build
+      - name: Deploy to Server
+        run: |
+          source $GITHUB_ENV
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+            "rm -rf /home/koraga-website/dist"
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r standalone/* ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/dist
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+            "cp -f /home/koraga-website/.env /home/koraga-website/dist/.env"
+
+      - name: Start PM2 Process
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-           "cd /home/tulucentre/builder && pm2 stop client && rm -rf build && cp ./.next ./build -r"
-
-      - name: Restart PM2 process
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} "pm2 restart client"
+            "pm2 start client || true"
