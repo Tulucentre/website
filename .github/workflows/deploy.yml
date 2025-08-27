@@ -30,6 +30,7 @@ jobs:
       - name: Verify Bun Installation
         run: |
           source $GITHUB_ENV
+          source $HOME/.bashrc
           bun --version
 
       - name: Checkout code
@@ -40,11 +41,13 @@ jobs:
       - name: Install dependencies
         run: |
           source $GITHUB_ENV
+          source $HOME/.bashrc
           bun install --lockfile-only
 
       - name: Build the project
         run: |
           source $GITHUB_ENV
+          source $HOME/.bashrc
           bun run build
 
       - name: Prepare standalone output
