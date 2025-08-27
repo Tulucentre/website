@@ -41,6 +41,7 @@ jobs:
 
       - name: Build the project
         run: |
+          source $GITHUB_ENV
           bun run build
 
       - name: Prepare standalone output
