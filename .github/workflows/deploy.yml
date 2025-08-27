@@ -23,14 +23,11 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
-          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
-          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
-          source $GITHUB_ENV
+          echo "BUN_INSTALL=$HOME/.bun" >> $GITHUB_ENV
+          echo "PATH=$HOME/.bun/bin:$PATH" >> $GITHUB_ENV
 
       - name: Verify Bun Installation
         run: |
-          source $GITHUB_ENV
-          source $HOME/.bashrc
           bun --version
 
       - name: Checkout code
@@ -40,19 +37,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          source $GITHUB_ENV
-          source $HOME/.bashrc
           bun install --lockfile-only
 
       - name: Build the project
         run: |
-          source $GITHUB_ENV
-          source $HOME/.bashrc
           bun run build
 
       - name: Prepare standalone output
         run: |
-          source $GITHUB_ENV
           mkdir -p standalone
           cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
           mv .next/standalone/* standalone/
