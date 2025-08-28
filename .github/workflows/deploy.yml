@@ -70,7 +70,7 @@ jobs:
       - name: Rename Extracted Directory
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "mv /home/koraga-website/extracted /home/koraga-website/dist/"
+            "mv /home/koraga-website/extracted/standalone /home/koraga-website/dist"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
             "cp -f /home/koraga-website/.env /home/koraga-website/dist/.env"
 
