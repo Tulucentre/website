@@ -60,7 +60,7 @@ jobs:
         run: |
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.zip ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/standalone.zip
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "unzip -o /home/koraga-website/standalone.zip -d /home/koraga-website/extracted"
+            "unzip -o /home/koraga-website/standalone.zip -d /home/koraga-website/extracted/"
 
       - name: Stop Existing PM2 Process
         run: |
@@ -70,7 +70,7 @@ jobs:
       - name: Rename Extracted Directory
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "mv /home/koraga-website/extracted /home/koraga-website/dist"
+            "mv /home/koraga-website/extracted /home/koraga-website/dist/"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
             "cp -f /home/koraga-website/.env /home/koraga-website/dist/.env"
 
