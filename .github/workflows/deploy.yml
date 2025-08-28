@@ -53,8 +53,7 @@ jobs:
         run: |
           mkdir -p standalone
           cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
-          mv .next/standalone/* standalone/
-          zip -r standalone.zip standalone
+          zip -r standalone.zip .next/standalone
 
       - name: Upload Build and extract
         run: |
