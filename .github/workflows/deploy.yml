@@ -51,15 +51,17 @@ jobs:
 
       - name: Prepare standalone output
         run: |
-          mkdir -p standalone
           cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
-          zip -r standalone.zip .next/standalone
+          mkdir -p output
+          cp -r .next/standalone/* output/
+          cp -r .next/standalone/.next output/.next
+          tar -czvf standalone.tar.gz output
 
       - name: Upload Build and extract
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.zip ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/standalone.zip
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.tar.gz ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/standalone.tar.gz
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "unzip -o /home/koraga-website/standalone.zip -d /home/koraga-website/extracted"
+            "mkdir -p extracted && tar -xzvf /home/koraga-website/standalone.tar.gz -C /home/koraga-website/extracted"
 
       - name: Stop Existing PM2 Process
         run: |
@@ -69,7 +71,7 @@ jobs:
       - name: Rename Extracted Directory
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "mv /home/koraga-website/extracted/standalone /home/koraga-website/dist"
+            "mv /home/koraga-website/extracted /home/koraga-website/dist"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
             "cp -f /home/koraga-website/.env /home/koraga-website/dist/.env"
 
@@ -81,4 +83,4 @@ jobs:
       - name: Clean up
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "rm -f /home/koraga-website/standalone.zip && rm -rf /home/koraga-website/extracted"
+            "rm -f /home/koraga-website/standalone.tar.gz"
