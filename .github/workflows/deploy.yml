@@ -54,18 +54,23 @@ jobs:
           mkdir -p standalone
           cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
           mv .next/standalone/* standalone/
+          zip -r standalone.zip standalone
+
+      - name: Upload Build and extract
+        run: |
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.zip ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/standalone.zip
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+            "unzip -o /home/koraga-website/standalone.zip -d /home/koraga-website/extracted"
 
       - name: Stop Existing PM2 Process
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "pm2 stop client || true"
+            "pm2 stop client || true && [ -d /home/koraga-website/dist ] && rm -rf /home/koraga-website/dist || true"
 
-      - name: Deploy to Server
+      - name: Rename Extracted Directory
         run: |
-          source $GITHUB_ENV
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "rm -rf /home/koraga-website/dist"
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r standalone/* ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/dist
+            "mv /home/koraga-website/extracted /home/koraga-website/dist"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
             "cp -f /home/koraga-website/.env /home/koraga-website/dist/.env"
 
@@ -73,3 +78,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
             "pm2 start client || true"
+
+      - name: Clean up
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
+            "rm -f /home/koraga-website/standalone.zip && rm -rf /home/koraga-website/extracted"
