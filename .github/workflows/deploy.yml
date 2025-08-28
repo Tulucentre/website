@@ -62,7 +62,7 @@ jobs:
         run: |
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.tar.gz ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/standalone.tar.gz
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "mkdir -p extracted && tar -xzvf /home/koraga-website/standalone.tar.gz -C /home/koraga-website/extracted"
+            "mkdir -p /home/koraga-website/extracted && tar -xzvf /home/koraga-website/standalone.tar.gz -C /home/koraga-website/extracted"
 
       - name: Stop Existing PM2 Process
         run: |
