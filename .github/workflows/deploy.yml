@@ -11,6 +11,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    container:
+      image: almalinux:8.10
 
     steps:
       - name: Setup SSH
@@ -38,6 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           bun install --frozen-lockfile-only
+          bun prisma generate
 
       - name: Build the project
         env:
