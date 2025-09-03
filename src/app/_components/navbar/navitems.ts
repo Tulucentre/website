@@ -1,14 +1,16 @@
+const prefix = "/";
+
 export const navItems = [
   {
     name: "Home",
-    link: "/koraga",
+    link: prefix,
   },
   {
     name: "Words",
-    link: "/koraga/words",
+    link: prefix + "words",
   },
   {
     name: "About",
-    link: "/koraga/about",
+    link: prefix + "about",
   },
 ];

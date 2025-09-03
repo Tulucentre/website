@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { fileToBase64 } from "~/lib/utils";
@@ -12,6 +12,7 @@ export default function Admin() {
   const loadMutation = api.snapshot.loadSnapshot.useMutation();
   const session = useSession();
 
+  const [id, setId] = useState("");
   return (
     <div>
       <Input
@@ -116,9 +117,10 @@ export default function Admin() {
         </Button>
       )}
 
+      <Input value={id} onChange={(e) => setId(e.target.value)} />
       <Button
         onClick={() => {
-          loadMutation.mutate("cmdk2c8kq0006rqnnnlnn2fqz");
+          loadMutation.mutate(id);
         }}
       >
         Load

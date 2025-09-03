@@ -22,12 +22,12 @@ model Account {
   type                     String
   provider                 String
   providerAccountId        String
-  refresh_token            String? // @db.Text
-  access_token             String? // @db.Text
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
   expires_at               Int?
   token_type               String?
   scope                    String?
-  id_token                 String? // @db.Text
+  id_token                 String? @db.Text
   session_state            String?
   user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   refresh_token_expires_in Int?
@@ -98,7 +98,7 @@ model logs {
   id String @id @default(cuid())
 
   title       String
-  description String?
+  description String? @db.Text
   reference   String?
 
   // others    String[]
@@ -120,14 +120,14 @@ model Word {
   cf_similar_meaning String?
   grammatical_form   String?
 
-  tulu_meaning    String?
-  kannada_meaning String?
-  english_meaning String?
+  tulu_meaning    String? @db.Text
+  kannada_meaning String? @db.Text
+  english_meaning String? @db.Text
 
-  usage_sentence String?
-  usage_tulu     String?
-  usage_kannada  String?
-  usage_english  String?
+  usage_sentence String? @db.Text
+  usage_tulu     String? @db.Text
+  usage_kannada  String? @db.Text
+  usage_english  String? @db.Text
 
   snapshotId String
   Snapshot   Snapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)

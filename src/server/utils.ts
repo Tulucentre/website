@@ -83,17 +83,30 @@ export async function uploadFileToServer(
   path: string,
 ): Promise<{ status: number; statusText: string; url: string | null }> {
   try {
-    const blob = await put(path, file, {
-      access: "public",
-      // addRandomSuffix: true,
-      token: env.BLOB_READ_WRITE_TOKEN,
+    // HACK: code to upload to vercel blob storage
+    // const blob = await put(path, file, {
+    //   access: "public",
+    //   // addRandomSuffix: true,
+    //   token: env.BLOB_READ_WRITE_TOKEN,
+    // });
+
+    // HACK: code to upload to custom file server
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("path", path);
+    formData.append("secret", env.FILE_SERVER_SECRET);
+
+    const res = await fetch(`${env.FILE_SERVER_URL}/api/fs/addfile`, {
+      method: "POST",
+      body: formData,
     });
 
-    if (blob.url) {
+    if (res.status === 201) {
       return {
         status: 201,
         statusText: "File uploaded successfully",
-        url: blob.url,
+        // url: blob.url,
+        url: path,
       };
     } else {
       return {
@@ -115,7 +128,13 @@ export async function getFile(
   path: string,
   fileName: string,
 ): Promise<File | null> {
-  const res = await fetch(path);
+  // HACK: code to fetch file from vercel blob storage
+  // const res = await fetch(path);
+
+  // HACK: code to fetch file from custom file server
+  const res = await fetch(
+    `${env.FILE_SERVER_URL}/api/fs/getfile?path=${encodeURIComponent(path)}`,
+  );
 
   if (res.ok) {
     const blob = await res.blob();

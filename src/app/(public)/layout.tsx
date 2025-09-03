@@ -4,7 +4,7 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import PublicLayout from "../../_components/layouts/RootLayout";
+import PublicLayout from "../_components/layouts/RootLayout";
 
 export const metadata: Metadata = {
   title: "Tulucentre",

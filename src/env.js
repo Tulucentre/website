@@ -17,7 +17,9 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-    BLOB_READ_WRITE_TOKEN: z.string(),
+    FILE_SERVER_URL: z.string(),
+    FILE_SERVER_SECRET: z.string(),
+    // BLOB_READ_WRITE_TOKEN: z.string(),
   },
 
   /**
@@ -44,7 +46,10 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
 
     NEXT_PUBLIC_PRODUCTION: process.env.NODE_ENV,
-    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+
+    FILE_SERVER_URL: process.env.FILE_SERVER_URL,
+    FILE_SERVER_SECRET: process.env.FILE_SERVER_SECRET,
+    // BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
