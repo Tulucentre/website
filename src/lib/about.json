@@ -1,15 +1,15 @@
 {
   "images": {
-    "design": "/images/About-design.png",
+    "design": "/koraga/images/About-design.png",
     "aboutImages": {
-      "img1": "/images/about-images/img1.jpg",
-      "img2": "/images/about-images/img2.jpg",
-      "img3": "/images/about-images/img3.jpg",
-      "img4": "/images/about-images/img4.jpg",
-      "img5": "/images/about-images/img5.jpg",
-      "img6": "/images/about-images/img6.jpg",
-      "img7": "/images/about-images/img7.jpg",
-      "img8": "/images/about-images/img8.jpg"
+      "img1": "/koraga/images/about-images/img1.jpg",
+      "img2": "/koraga/images/about-images/img2.jpg",
+      "img3": "/koraga/images/about-images/img3.jpg",
+      "img4": "/koraga/images/about-images/img4.jpg",
+      "img5": "/koraga/images/about-images/img5.jpg",
+      "img6": "/koraga/images/about-images/img6.jpg",
+      "img7": "/koraga/images/about-images/img7.jpg",
+      "img8": "/koraga/images/about-images/img8.jpg"
     }
   },
   "content": {

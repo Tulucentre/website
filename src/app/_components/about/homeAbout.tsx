@@ -46,7 +46,7 @@ export function AboutHome() {
             <div className="group relative">
               <div className="from-primary to-secondary absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
               <Image
-                src="/images/about-images/img1.jpg"
+                src="/koraga/images/about-images/img1.jpg"
                 width={480}
                 height={320}
                 className="relative z-10 h-auto w-full rounded-xl border-4 border-white object-cover shadow-2xl transition-transform duration-300"

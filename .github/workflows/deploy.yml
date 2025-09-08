@@ -62,21 +62,21 @@ jobs:
 
       - name: Upload Build and extract
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.tar.gz ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/koraga-website/standalone.tar.gz
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa standalone.tar.gz ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }}:/home/tulucentre/standalone.tar.gz
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "mkdir -p /home/koraga-website/extracted && tar -xzvf /home/koraga-website/standalone.tar.gz -C /home/koraga-website/extracted"
+            "mkdir -p /home/tulucentre/extracted && tar -xzvf /home/tulucentre/standalone.tar.gz -C /home/tulucentre/extracted"
 
       - name: Stop Existing PM2 Process
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "pm2 stop client || true && [ -d /home/koraga-website/dist ] && rm -rf /home/koraga-website/dist || true"
+            "pm2 stop client || true && [ -d /home/tulucentre/dist ] && rm -rf /home/tulucentre/dist || true"
 
       - name: Rename Extracted Directory
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "mv /home/koraga-website/extracted /home/koraga-website/dist"
+            "mv /home/tulucentre/extracted /home/tulucentre/dist"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "cp -f /home/koraga-website/.env /home/koraga-website/dist/.env"
+            "cp -f /home/tulucentre/.env /home/tulucentre/dist/.env"
 
       - name: Start PM2 Process
         run: |
@@ -86,4 +86,4 @@ jobs:
       - name: Clean up
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.TULUCENTRE_SERVER_USER }}@${{ secrets.TULUCENTRE_SERVER_IP }} \
-            "rm -f /home/koraga-website/standalone.tar.gz"
+            "rm -f /home/tulucentre/standalone.tar.gz"

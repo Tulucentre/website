@@ -7,21 +7,22 @@
 
 @font-face {
   font-family: "Caprasimo";
-  src: url("/fonts/Caprasimo/Caprasimo-Regular.ttf") format("truetype");
+  src: url("/koraga/fonts/Caprasimo/Caprasimo-Regular.ttf") format("truetype");
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Fira-Code";
-  src: url("/fonts/Fira_Code/FiraCode-VariableFont_wght.ttf") format("truetype");
+  src: url("/koraga/fonts/Fira_Code/FiraCode-VariableFont_wght.ttf")
+    format("truetype");
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Kannada";
-  src: url("/fonts/Noto_Sans_Kannada/NotoSansKannada-VariableFont_wdth.ttf")
+  src: url("/koraga/fonts/Noto_Sans_Kannada/NotoSansKannada-VariableFont_wdth.ttf")
     format("truetype");
   font-style: normal;
   font-display: swap;

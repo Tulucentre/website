@@ -1,4 +1,4 @@
-const prefix = "/";
+const prefix = "/koraga/";
 
 export const navItems = [
   {

@@ -34,7 +34,7 @@ export default function AboutCarousel({
                 <Image
                   src={
                     src ||
-                    "/placeholder.svg?height=320&width=240&query=Tulu Centre Team"
+                    "/koraga/placeholder.svg?height=320&width=240&query=Tulu Centre Team"
                   }
                   alt="Tulu Centre Team"
                   width={400}

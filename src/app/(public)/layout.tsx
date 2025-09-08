@@ -9,7 +9,7 @@ import PublicLayout from "../_components/layouts/RootLayout";
 export const metadata: Metadata = {
   title: "Tulucentre",
   description: "A comprehensive Tulu language resource",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/koraga/favicon.ico" }],
 };
 
 const geist = Geist({

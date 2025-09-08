@@ -110,7 +110,7 @@ export default function Navbar() {
         <div className="flex w-full max-w-7xl items-center justify-between">
           <Link href="/koraga">
             <Image
-              src={"/images/nitte-university.svg"}
+              src={"/koraga/images/nitte-university.svg"}
               className="h-10 w-fit sm:h-12 md:h-14 lg:h-16"
               id="logo"
               height={400}

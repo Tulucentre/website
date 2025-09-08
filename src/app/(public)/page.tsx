@@ -7,7 +7,7 @@ import PopularList from "~/app/_components/popular/popular";
 export default function Home() {
   return (
     <section>
-      <div className="h-full w-full bg-[url(/images/background.svg)]">
+      <div className="h-full w-full bg-[url(/koraga/images/background.svg)]">
         <HeadingAndSearch />
         <PopularList />
       </div>
