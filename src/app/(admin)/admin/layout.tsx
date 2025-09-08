@@ -24,7 +24,9 @@ export default function RootLayout({
     <html lang="en" className={`${geist.variable}`}>
       <body>
         <TRPCReactProvider>
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider basePath="/koraga/api/auth">
+            {children}
+          </SessionProvider>
           {/* <PublicLayout>{children}</PublicLayout> */}
         </TRPCReactProvider>
       </body>

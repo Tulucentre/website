@@ -49,6 +49,7 @@ jobs:
           BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
           FILE_SERVER_URL: ${{ secrets.FILE_SERVER_URL }}
           FILE_SERVER_SECRET: ${{ secrets.FILE_SERVER_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
         run: |
           bun run build
 
